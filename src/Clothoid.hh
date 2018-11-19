@@ -25,7 +25,7 @@
 #define CLOTHOID_HH
 
 #include <vector>
-
+#include <iostream>
 //! Clothoid computations routine
 namespace Clothoid {
 

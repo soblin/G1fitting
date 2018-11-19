@@ -16,3 +16,5 @@ DerivedData
 lib
 *.
 test.xcodeproj
+
+G1fitting/*.mexa64
