@@ -33,7 +33,7 @@ namespace Clothoid {
 
   typedef double valueType ;
   typedef int    indexType ;
-  
+typedef std::vector<double> d_vector;  
   /*\
    |   _____                         _
    |  |  ___| __ ___  ___ _ __   ___| |
@@ -105,7 +105,12 @@ namespace Clothoid {
                         valueType   c,
                         valueType & intC,
                         valueType & intS ) ;
-  
+
+d_vector
+GeneralizedFresnelCSPython(valueType a,
+                           valueType b,
+                           valueType c);
+
   /*\
    |    ____ _       _   _           _     _
    |   / ___| | ___ | |_| |__   ___ (_) __| |
@@ -135,6 +140,18 @@ namespace Clothoid {
                  valueType & k,
                  valueType & dk,
                  valueType & L ) ;
+
+/*
+ * return [k, dk, L]
+ */
+d_vector
+buildClothoidPython(
+    valueType x0,
+    valueType y0,
+    valueType theta0,
+    valueType x1,
+    valueType y1,
+    valueType theta1);
 
   indexType
   buildClothoid( valueType   x0,

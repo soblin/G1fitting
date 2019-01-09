@@ -153,7 +153,8 @@ namespace Clothoid {
                S --- S(x)
     \*=======================================================*/
 
-    valueType const eps = 1E-15 ;    
+    /// soblin 1E-15 -> 1E-8
+    valueType const eps = 1E-8 ;    
     valueType const x   = y > 0 ? y : -y ;
 
     if ( x < 1.0 ) {
@@ -540,6 +541,19 @@ namespace Clothoid {
     intS = xx * sinc + yy * cosc ;
   }
 
+/// soblin
+d_vector
+GeneralizedFresnelCSPython(valueType a,
+                           valueType b,
+                           valueType c){
+  double C, S;
+  GeneralizedFresnelCS(a, b, c, C, S);
+  d_vector ret(2);
+  ret.push_back(C);
+  ret.push_back(S);
+  return ret;
+}
+
   // -------------------------------------------------------------------------
   // -------------------------------------------------------------------------
   
@@ -619,9 +633,11 @@ namespace Clothoid {
       g   = intS[0] ;
       dg  = intC[2] - intC[1] ;
       A  -= g / dg ;
-    } while ( ++niter <= 10 && std::abs(g) > 1E-12 ) ;
+      /// soblin 1E-12 -> 1E-8
+    } while ( ++niter <= 10 && std::abs(g) > 1E-8 ) ;
 
-    CLOTHOID_ASSERT( std::abs(g) < 1E-8, "Newton do not converge, g = " << g << " niter = " << niter ) ;
+    /// soblin 1E-8 -> 1E-5
+    CLOTHOID_ASSERT( std::abs(g) < 1E-5, "Newton do not converge, g = " << g << " niter = " << niter ) ;
     GeneralizedFresnelCS( 2*A, delta-A, phi0, intC[0], intS[0] ) ;
     L = r/intC[0] ;
 
@@ -631,6 +647,24 @@ namespace Clothoid {
     
     return niter ;
   }
+
+/// soblin
+d_vector
+buildClothoidPython(
+    valueType x0,
+    valueType y0,
+    valueType theta0,
+    valueType x1,
+    valueType y1,
+    valueType theta1){
+  double k, dk, L;
+  d_vector ret;
+  buildClothoid(x0, y0, theta0, x1, y1, theta1, k, dk, L);
+  ret.push_back(k);
+  ret.push_back(dk);
+  ret.push_back(L);
+  return ret;
+}
 
   int
   buildClothoid( valueType   x0,

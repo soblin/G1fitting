@@ -51,13 +51,13 @@ ENDFOREACH (F ${S})
 
 INCLUDE_DIRECTORIES( src )
 
-add_library( ${TARGET} STATIC ${SOURCES} ${HEADERS} )
+#add_library( ${TARGET} STATIC ${SOURCES} ${HEADERS} )
 
-ADD_EXECUTABLE( test1 src_tests/test1.cc ${HEADERS} )
-TARGET_LINK_LIBRARIES( test1 ${TARGET} )
+#ADD_EXECUTABLE( test1 src_tests/test1.cc ${HEADERS} )
+#TARGET_LINK_LIBRARIES( test1 ${TARGET} )
 
-ADD_EXECUTABLE( test2 src_tests/test2.cc ${HEADERS} )
-TARGET_LINK_LIBRARIES( test2 ${TARGET} )
+#ADD_EXECUTABLE( test2 src_tests/test2.cc ${HEADERS} )
+#TARGET_LINK_LIBRARIES( test2 ${TARGET} )
 
 #MESSAGE( STATUS "Using ${SSE_FLAGS} extensions")
 #MESSAGE( STATUS "C compiler                  = ${CMAKE_C_COMPILER_ID} ${CMAKE_C_COMPILER}" )
@@ -68,3 +68,29 @@ TARGET_LINK_LIBRARIES( test2 ${TARGET} )
 #MESSAGE( STATUS "CMAKE_C_FLAGS               = ${CMAKE_C_FLAGS}" )
 #MESSAGE( STATUS "CMAKE_SYSTEM_NAME           = ${CMAKE_SYSTEM_NAME}" )
 #MESSAGE( STATUS "CMAKE_SYSTEM_PROCESSOR      = ${CMAKE_SYSTEM_PROCESSOR}" )
+
+# for Python
+set(LIBRARY_OUTPUT_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+add_library(
+  clothoid2
+  SHARED
+  src/Clothoid.cc
+  src/CubicRootsFlocke.cc
+  src/Triangle2D.cc
+  src/python2.cc
+  )
+set_target_properties(clothoid2 PROPERTIES PREFIX "")
+target_link_libraries(clothoid2 boost_python-py27)
+target_include_directories(clothoid2 PUBLIC /usr/include/python2.7)
+
+add_library(
+  clothoid3
+  SHARED
+  src/Clothoid.cc
+  src/CubicRootsFlocke.cc
+  src/Triangle2D.cc
+  src/python3.cc
+  )
+set_target_properties(clothoid3 PROPERTIES PREFIX "")
+target_link_libraries(clothoid3 boost_python-py35)
+target_include_directories(clothoid3 PUBLIC /usr/include/python3.5)

@@ -6,6 +6,7 @@
 *.log
 *.spl
 *.gz
+*.so
 
 submission/
 
