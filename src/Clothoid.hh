@@ -106,6 +106,7 @@ typedef std::vector<double> d_vector;
                         valueType & intC,
                         valueType & intS ) ;
 
+/// soblin
 d_vector
 GeneralizedFresnelCSPython(valueType a,
                            valueType b,
@@ -141,6 +142,7 @@ GeneralizedFresnelCSPython(valueType a,
                  valueType & dk,
                  valueType & L ) ;
 
+/// soblin
 /*
  * return [k, dk, L]
  */
