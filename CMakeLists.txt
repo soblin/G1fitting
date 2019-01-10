@@ -69,6 +69,15 @@ INCLUDE_DIRECTORIES( src )
 #MESSAGE( STATUS "CMAKE_SYSTEM_NAME           = ${CMAKE_SYSTEM_NAME}" )
 #MESSAGE( STATUS "CMAKE_SYSTEM_PROCESSOR      = ${CMAKE_SYSTEM_PROCESSOR}" )
 
+# soblin
+add_library(
+  Clothoid
+  SHARED
+  src/Clothoid.cc
+  src/CubicRootsFlocke.cc
+  src/Triangle2D.cc
+  )
+
 # for Python
 set(LIBRARY_OUTPUT_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 add_library(
