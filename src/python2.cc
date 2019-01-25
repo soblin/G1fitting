@@ -29,7 +29,7 @@ pointsOnClothoid(double x0, double y0, double theta0, double k, double dk, doubl
 // return value: X[npts], Y[npts], dk, L
 // format: [X[npts], Y[npts], dk, L]
 
-BOOST_PYTHON_MODULE(clothoid2){
+BOOST_PYTHON_MODULE(clothoid_py){
   using namespace boost::python;
   def("buildClothoid", &Clothoid::buildClothoidPython);
   def("GeneralizedFresnelCS", &Clothoid::GeneralizedFresnelCSPython);
